@@ -1,0 +1,36 @@
+package net.idhamide.aboubaker.services;
+
+import net.idhamide.aboubaker.entities.Agence;
+import net.idhamide.aboubaker.entities.Vehicle;
+import net.idhamide.aboubaker.repository.AgenceRepository;
+import net.idhamide.aboubaker.repository.VehicleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class VehicleService {
+    private final VehicleRepository vehicleRepository;
+
+    @Autowired
+    public VehicleService(VehicleRepository vehicleRepository){
+        this.vehicleRepository = vehicleRepository;
+    }
+
+    public List<Vehicle> getVehicles() {
+        return vehicleRepository.findAll();
+    }
+
+    public void addNewVehicle(Vehicle vehicle) {
+        vehicleRepository.save(vehicle);
+    }
+
+    public void deleteVehicle(Long vehicleId) {
+        boolean exists = vehicleRepository.existsById(vehicleId);
+        if (!exists) {
+            throw new IllegalStateException("Vehicle avec Lidentifient ID:" + vehicleId + " non trouve");
+        }
+        vehicleRepository.deleteById(vehicleId);
+    }
+}
