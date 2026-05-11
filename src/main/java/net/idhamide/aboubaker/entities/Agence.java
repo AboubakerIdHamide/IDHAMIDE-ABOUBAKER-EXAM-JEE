@@ -26,5 +26,6 @@ public class Agence {
     private String telephone;
 
     @OneToMany(mappedBy="agence")
+    @ToString.Exclude
     private List<Vehicle> vehicles;
 }

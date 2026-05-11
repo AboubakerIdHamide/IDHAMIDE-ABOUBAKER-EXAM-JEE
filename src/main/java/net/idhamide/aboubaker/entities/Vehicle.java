@@ -34,5 +34,6 @@ public class Vehicle {
 
     @ManyToOne
     @JoinColumn(name="agence_id", nullable=false)
+    @ToString.Exclude
     private Agence agence;
 }
